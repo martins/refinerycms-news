@@ -1,15 +1,5 @@
-class AddExternalUrlToNewsItems < ActiveRecord::Migration
-
-  def up
-    unless ::Refinery::News::Item.column_names.map(&:to_sym).include?(:external_url)
-      add_column ::Refinery::News::Item.table_name, :external_url, :string
-    end
+class AddExternalUrlToNewsItems < ActiveRecord::Migration[4.2]
+  def change
+    add_column :refinery_news_items, :external_url, :string
   end
-
-  def down
-    if ::Refinery::News::Item.column_names.map(&:to_sym).include?(:external_url)
-      remove_column ::Refinery::News::Item.table_name, :external_url
-    end
-  end
-
 end

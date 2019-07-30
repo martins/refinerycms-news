@@ -1,21 +1,17 @@
-class TranslateNewsItems < ActiveRecord::Migration
+class TranslateNewsItems < ActiveRecord::Migration[4.2]
+  def change
+    create_table :refinery_news_item_translations do |t|
+      # Translated attribute(s)
+      t.string :title
+      t.text :body
 
-  def up
-    ::Refinery::News::Item.reset_column_information
-    unless defined?(::Refinery::News::Item::Translation) && ::Refinery::News::Item::Translation.table_exists?
-      ::Refinery::News::Item.create_translation_table!({
-        :title => :string,
-        :body => :text,
-      }, {
-        :migrate_data => true
-      })
+      t.string :locale, null: false
+      t.integer :refinery_news_item_id, null: false
+
+      t.timestamps null: false
     end
+
+    add_index :refinery_news_translations, :locale, name: :index_refinery_news_translations_on_locale
+    add_index :refinery_news_translations, [:refinery_news_item_id, :locale], name: :index_2mno5zfnvxdf4fd576nsaqrr1lry3cs87sig3hyf, unique: true
   end
-
-  def down
-    ::Refinery::News::Item.reset_column_information
-
-    ::Refinery::News::Item.drop_translation_table!
-  end
-
 end

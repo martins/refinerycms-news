@@ -1,13 +1,5 @@
-class AddImageIdToNewsItems < ActiveRecord::Migration
-
-  def up
-    unless ::Refinery::News::Item.column_names.map(&:to_sym).include?(:image_id)
-      add_column ::Refinery::News::Item.table_name, :image_id, :integer
-    end
+class AddImageIdToNewsItems < ActiveRecord::Migration[4.2]
+  def change
+    add_column :refinery_news_items, :image_id, :integer
   end
-
-  def down
-    remove_column ::Refinery::News::Item.table_name, :image_id
-  end
-
 end

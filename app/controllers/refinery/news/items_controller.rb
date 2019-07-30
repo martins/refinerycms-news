@@ -1,9 +1,9 @@
 module Refinery
   module News
     class ItemsController < ::ApplicationController
-      before_filter :find_page
-      before_filter :find_published_news_items, :only => [:index]
-      before_filter :find_news_item, :find_latest_news_items, :only => [:show]
+      before_action :find_page
+      before_action :find_published_news_items, only: [:index]
+      before_action :find_news_item, :find_latest_news_items, only: [:show]
 
       def index
         # render 'index'
@@ -35,13 +35,12 @@ module Refinery
       end
 
       def find_news_item
-        @item = Item.published.translated.friendly.find(params[:id])
+        @item = Item.translated.friendly.find(params[:id])
       end
 
       def find_page
         @page = ::Refinery::Page.find_by_link_url("/news") if defined?(::Refinery::Page)
       end
-
     end
   end
 end

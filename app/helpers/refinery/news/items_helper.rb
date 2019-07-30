@@ -14,7 +14,7 @@ module Refinery
       end
 
       def news_item_teaser_enabled?
-        Refinery::News::Item.teasers_enabled?
+        Refinery::News.teasers_enabled
       end
 
       def news_item_teaser(item)
@@ -22,8 +22,8 @@ module Refinery
           item.custom_teaser.html_safe
         else
           truncate(item.body, {
-            :length => Refinery::Setting.find_or_set(:news_item_teaser_length, 250),
-            :preserve_html_tags => true
+            length: Refinery::News.news_item_teaser_length,
+            preserve_html_tags: true
           }).html_safe
         end
       end

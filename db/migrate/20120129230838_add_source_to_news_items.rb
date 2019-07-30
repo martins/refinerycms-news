@@ -1,16 +1,6 @@
 # This migration comes from refinery_news (originally 7)
-class AddSourceToNewsItems < ActiveRecord::Migration
-
-  def up
-    unless Refinery::News::Item.column_names.map(&:to_sym).include?(:source)
-      add_column Refinery::News::Item.table_name, :source, :string
-    end
+class AddSourceToNewsItems < ActiveRecord::Migration[4.2]
+  def change
+    add_column :refinery_news_items, :source, :string
   end
-
-  def down
-    if Refinery::News::Item.column_names.map(&:to_sym).include?(:source)
-      remove_column Refinery::News::Item.table_name, :source
-    end
-  end
-
 end

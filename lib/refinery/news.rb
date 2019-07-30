@@ -1,11 +1,11 @@
 require 'refinerycms-core'
-require 'refinerycms-settings'
 
 module Refinery
   autoload :NewsGenerator, 'generators/refinery/news_generator'
 
   module News
     require 'refinery/news/engine'
+    require 'refinery/news/configuration'
 
     class << self
       attr_writer :root
