@@ -14,6 +14,8 @@ group :test do
   gem 'pry'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'listen'
+  gem 'rails-controller-testing'
 end
 
 # Database Configuration
