@@ -82,7 +82,7 @@ module Refinery
 
         # rejects any item that has not been translated to the current locale.
         def translated
-          i18n.join_translations
+          i18n
         end
       end
     end
